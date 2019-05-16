@@ -18,12 +18,20 @@ while(1):
         for i in noAtual.estado:
             print("| " + str(i) + " |")
         print("--------------")
+
+        p = []
+        for i in noAtual.acao:
+            print(i, end=", ") 
+        print()
         break
     else:
         lista = arvore.funcaoSucessora(noAtual.estado)
         listaNos = []
+        aux = ['u','d','l','r']
         for i, estado in enumerate(lista):
-            no = No(estado, noAtual,i, noAtual.custoCaminho, noAtual.profundidade)
+            acao = noAtual.acao[:]
+            acao.append(aux[i])
+            no = No(estado, noAtual, acao, noAtual.custoCaminho, noAtual.profundidade)
             if(not(arvore.verificaJaAberto(no))):
                 listaNos.append(no)
                 arvore.inseriJaAberto(no)
