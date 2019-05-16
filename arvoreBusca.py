@@ -3,6 +3,9 @@ from no import No
 import copy
 
 class arvoreBusca():
+
+    jaAberto = []
+
     def __init__(self, problema, estrategia):
         self.problema = problema
         self.estrategia = estrategia
@@ -21,10 +24,20 @@ class arvoreBusca():
         return True
 
     def encontraVazio(self, estadoAtual):
-         for i, x in enumerate(estadoAtual):
+        for i, x in enumerate(estadoAtual):
             for j, y in enumerate(x):
                 if(y == 0):
                     return  [i,j]
+
+    def verificaJaAberto(self, no):
+        if(no.estado in self.jaAberto):
+            return True
+
+        return False
+
+
+    def inseriJaAberto(self, no):
+        self.jaAberto.append(no.estado)
 
     def funcaoSucessora(self, estadoAtual):
         i,j = self.encontraVazio(estadoAtual)
@@ -74,16 +87,17 @@ while(1):
         print(i)
 
     if(arvore.testaObjetivo(noAtual.estado)):
-        print("sucesso")
+        print("--------------")
         for i in noAtual.estado:
-            print(i)
+            print("| " + str(i) + " |")
+        print("--------------")
         break
     else:
         lista = arvore.funcaoSucessora(noAtual.estado)
         listaNos = []
         for i, estado in enumerate(lista):
             no = No(estado, noAtual,i, noAtual.custoCaminho, noAtual.profundidade)
-            listaNos.append(no)
+            if(not(arvore.verificaJaAberto(no))):
+                listaNos.append(no)
+                arvore.inseriJaAberto(no)
         arvore.borda.inserirTodos(listaNos)
-        #arvore.borda.imprimir()
-    #break
