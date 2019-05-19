@@ -17,6 +17,8 @@ class Borda:
     def removerPrimeiro(self):
         if(self.estrategia == "largura"):
             return self.l.pop(0)
+        elif(self.estrategia == "profundidade"):
+            return self.l.pop()
 
     def inserirTodos(self, nos):
         self.l.extend(nos)

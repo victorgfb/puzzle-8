@@ -3,6 +3,8 @@ from no import No
 import sys
 
 arquivo = sys.argv[1]
+modo = sys.argv[2]
+
 print(arquivo)
 
 f = open(arquivo, 'r')
@@ -26,7 +28,7 @@ if(len(l) != 3):
 for i in l:
     print(i)
 
-arvore = arvoreBusca(l, "largura")
+arvore = arvoreBusca(l, modo)
 
 while(1):    
     if(arvore.borda.vazia()):
