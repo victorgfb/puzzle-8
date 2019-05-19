@@ -1,7 +1,32 @@
 from arvoreBusca import arvoreBusca
 from no import No
+import sys
 
-arvore = arvoreBusca([[ 1,  2,  3], [ 4,  7, 6], [ 8,  5,  0]], "largura")
+arquivo = sys.argv[1]
+print(arquivo)
+
+f = open(arquivo, 'r')
+c = f.readline()
+l = []
+
+while(len(c) > 0):
+    c = c.split()
+    if(len(c) != 3):
+        print("entrada invalida")
+        quit()
+    x = [int(c[0]),int(c[1]), int(c[2])]
+    c = f.readline()
+    l.append(x)
+
+if(len(l) != 3):
+    print("entrada invalida")
+    quit()
+    
+
+for i in l:
+    print(i)
+
+arvore = arvoreBusca(l, "largura")
 
 while(1):    
     if(arvore.borda.vazia()):
