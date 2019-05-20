@@ -7,7 +7,8 @@ class arvoreBusca():
     jaAberto = []
 
     def __init__(self, problema, estrategia):
-        if((self.testaSolucionavel(problema)% 2) == 1):
+        
+        if(not(self.testaSolucionavel(problema))):
             print("tabuleiro invalido")
             quit()
 
@@ -26,7 +27,8 @@ class arvoreBusca():
                     if j < last:
                         count +=1
                     last = j
-        return count
+
+        return (count % 2) == 0
 
 
     def testaObjetivo(self, estadoAtual):
