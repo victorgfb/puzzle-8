@@ -5,6 +5,10 @@ import sys
 arquivo = sys.argv[1]
 modo = sys.argv[2]
 
+if(modo != "largura") and (modo != "profundidade"):
+    print("modo invalido")
+    quit()
+
 print(arquivo)
 
 f = open(arquivo, 'r')

@@ -7,11 +7,27 @@ class arvoreBusca():
     jaAberto = []
 
     def __init__(self, problema, estrategia):
+        if((self.testaSolucionavel(problema)% 2) == 1):
+            print("tabuleiro invalido")
+            quit()
+
         self.problema = problema
         self.estrategia = estrategia
         self.borda = Borda(estrategia)
         no = No(problema, None, None, 0, 0)
         self.borda.inserir(no)
+
+    def testaSolucionavel(self, puzzle):
+        last = -1
+        count = 0
+        for i in puzzle:
+            for j in i:
+                if(j != 0):
+                    if j < last:
+                        count +=1
+                    last = j
+        return count
+
 
     def testaObjetivo(self, estadoAtual):
         anterior = 0
