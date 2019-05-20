@@ -41,8 +41,8 @@ while(1):
 
     noAtual = arvore.borda.removerPrimeiro()
     print(noAtual.profundidade)
-    for i in noAtual.estado:
-        print(i)
+    '''for i in noAtual.estado:
+        print(i)'''
 
     if(arvore.testaObjetivo(noAtual.estado)):
         print("--------------")

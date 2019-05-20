@@ -19,15 +19,16 @@ class arvoreBusca():
         self.borda.inserir(no)
 
     def testaSolucionavel(self, puzzle):
-        last = -1
         count = 0
-        for i in puzzle:
-            for j in i:
-                if(j != 0):
-                    if j < last:
-                        count +=1
-                    last = j
+        aux = []
 
+        for elemento in puzzle:
+            aux.extend(elemento)
+
+        for i, elemento in enumerate(aux):
+            for proximo in aux[i:]:
+                if elemento > proximo and proximo and elemento:
+                    count += 1
         return (count % 2) == 0
 
 
