@@ -1,4 +1,5 @@
 from numpy import abs
+from no import No
 
 class Borda:
 
@@ -19,8 +20,9 @@ class Borda:
     def verificaHeuristica(self):
         for i in self.l:
             num = self.manhattanDistance(i.estado)
-            print(num)
-            quit()
+            i.heuristica = num
+        aux = sorted(self.l, key = No.getHeuristica)
+        self.l = aux
 
     def manhattanDistance(self, estado):
         count = 0
@@ -54,8 +56,7 @@ class Borda:
             return self.l.pop()
         elif (self.estrategia == "a"):
             self.verificaHeuristica()
-            print("entrou")
-            quit()
+            return self.l.pop(0)
 
     def inserirTodos(self, nos):
         self.l.extend(nos)

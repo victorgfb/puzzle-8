@@ -7,3 +7,8 @@ class No:
             self.acao.extend(acao)
         self.custoCaminho = custoCaminho + 1
         self.profundidade = profundidade + 1
+        self.heuristica = -1
+
+    def getHeuristica(self):
+        return self.heuristica
+        

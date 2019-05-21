@@ -1,7 +1,9 @@
 from arvoreBusca import arvoreBusca
 from no import No
+import time
 import sys
 
+ini = time.time()
 arquivo = sys.argv[1]
 modo = sys.argv[2]
 print(modo)
@@ -67,3 +69,5 @@ while(1):
                 listaNos.append(no)
                 arvore.inseriJaAberto(no)
         arvore.borda.inserirTodos(listaNos)
+fim = time.time()
+print("Tempo de execução = ", fim - ini)
