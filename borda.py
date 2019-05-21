@@ -1,3 +1,5 @@
+from numpy import abs
+
 class Borda:
 
     l = []
@@ -26,22 +28,23 @@ class Borda:
         for i, elemento in enumerate(estado):
             for j,_ in enumerate(elemento):
                 aux += 1
+                aux3 = aux
                 if (estado[i][j] != aux) and estado[i][j]:
                     aux2 = i*3 + j
-                    count = 0
                     if(aux2 >= (estado[i][j])):
                         aux2 -= 3
                         while(aux2 >= (estado[i][j] - 1)):
                             aux2 -= 3
                             count += 1
+                            aux3 -= 3
                     else:
                         aux2 +=3
                         while(aux2 <= (estado[i][j])):
                                 aux2 += 3
                                 count += 1
-                        
-                    print(estado[i][j],".")
-                    print(count)
+                                aux3 +=3
+                
+                    count +=  abs(aux3 - estado[i][j])                       
         return count
     
     def removerPrimeiro(self):
