@@ -4,8 +4,8 @@ import sys
 
 arquivo = sys.argv[1]
 modo = sys.argv[2]
-
-if(modo != "largura") and (modo != "profundidade"):
+print(modo)
+if(modo != "largura") and (modo != "profundidade") and (modo != "a"):
     print("modo invalido")
     quit()
 
@@ -41,8 +41,8 @@ while(1):
 
     noAtual = arvore.borda.removerPrimeiro()
     print(noAtual.profundidade)
-    '''for i in noAtual.estado:
-        print(i)'''
+    for i in noAtual.estado:
+        print(i)
 
     if(arvore.testaObjetivo(noAtual.estado)):
         print("--------------")
