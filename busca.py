@@ -7,12 +7,10 @@ import copy
 ini = time.time()
 arquivo = sys.argv[1]
 modo = sys.argv[2]
-print(modo)
-if(modo != "largura") and (modo != "profundidade") and (modo != "a"):
+
+if(modo != "largura") and (modo != "profundidade") and (modo != "gulosa"):
     print("modo invalido")
     quit()
-
-print(arquivo)
 
 f = open(arquivo, 'r')
 c = f.readline()
@@ -56,32 +54,33 @@ while(1):
             print("| " + str(i) + " |")
         print("--------------")
 
-        print("\n\nAções:")
-        p = []
-        for i in noAtual.acao:
-            print(i, end=", ") 
-        print("\n\n")
-
-        aux = copy.deepcopy(noAtual)
+        aux = copy.copy(noAtual)
 
         while(aux != None):
             for i in aux.estado:
                 print(i)
-            aux = copy.deepcopy(aux.noPai)
+            aux = copy.copy(aux.noPai)
             print()
         
+        print("\nAções:")
+        p = []
+        for i in noAtual.acao:
+            print(i, end=", ") 
+        print("\n")
+
+        print("Custo = ", noAtual.custoCaminho)
         break
     else:
         lista = arvore.funcaoSucessora(noAtual.estado)
         listaNos = []
-        aux = ['u','d','l','r']
+
         for i, estado in enumerate(lista):
             acao = noAtual.acao[:]
-            acao.append(aux[i])
-            no = No(estado, noAtual, acao, noAtual.custoCaminho, noAtual.profundidade)
+            acao.append(estado[1])
+            no = No(estado[0], noAtual, acao, noAtual.custoCaminho, noAtual.profundidade)
             if(not(arvore.verificaJaAberto(no))):
                 listaNos.append(no)
                 arvore.inseriJaAberto(no)
         arvore.borda.inserirTodos(listaNos)
 fim = time.time()
-print("Tempo de execução = ", fim - ini)
+print("\nTempo de execução = ", fim - ini)

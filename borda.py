@@ -1,3 +1,4 @@
+
 from numpy import abs
 from no import No
 
@@ -15,7 +16,10 @@ class Borda:
             return False
     
     def inserir(self, no):
-        self.l.append(no)
+        if(self.estrategia == "profundidade"):
+            self.l.insert(0,no)
+        else:
+            self.l.append(no)
 
     def verificaHeuristica(self):
         for i in self.l:
@@ -50,16 +54,13 @@ class Borda:
         return count
     
     def removerPrimeiro(self):
-        if(self.estrategia == "largura"):
-            return self.l.pop(0)
-        elif(self.estrategia == "profundidade"):
-            return self.l.pop()
-        elif (self.estrategia == "a"):
+        if (self.estrategia == "gulosa"):
             self.verificaHeuristica()
-            return self.l.pop(0)
+        return self.l.pop(0)
 
     def inserirTodos(self, nos):
-        self.l.extend(nos)
+        for no in nos:
+            self.inserir(no)
 
     def imprimir(self):
         for x in self.l:

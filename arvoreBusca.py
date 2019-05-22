@@ -68,27 +68,27 @@ class arvoreBusca():
             aux  = novoEstado[i -1][j]
             novoEstado[i -1][j] = 0
             novoEstado[i][j] = aux
-            lista.append(novoEstado)
+            lista.append([novoEstado,'c'])
 
         if((i +1) < len(estadoAtual)):
             novoEstado =  copy.deepcopy(estadoAtual)
             aux  = estadoAtual[i + 1][j]
             novoEstado[i + 1][j] = 0
             novoEstado[i][j] = aux
-            lista.append(novoEstado)
+            lista.append([novoEstado,'b'])
         
         if(j != 0):
             novoEstado =  copy.deepcopy(estadoAtual)
             aux  = estadoAtual[i][j -1]
             novoEstado[i][j - 1] = 0
             novoEstado[i][j] = aux
-            lista.append(novoEstado)
+            lista.append([novoEstado,'e'])
         
         if((j+1) < len(estadoAtual[0])):
             novoEstado =  copy.deepcopy(estadoAtual)
             aux  = estadoAtual[i][j +1]
             novoEstado[i][j + 1] = 0
             novoEstado[i][j] = aux
-            lista.append(novoEstado)
+            lista.append([novoEstado, 'd'])
 
         return lista
