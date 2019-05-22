@@ -2,6 +2,7 @@ from arvoreBusca import arvoreBusca
 from no import No
 import time
 import sys
+import copy
 
 ini = time.time()
 arquivo = sys.argv[1]
@@ -46,16 +47,29 @@ while(1):
     for i in noAtual.estado:
         print(i)
 
+    print("\n\n")
+
     if(arvore.testaObjetivo(noAtual.estado)):
         print("--------------")
+        print("---SOLUÇÂO---")
         for i in noAtual.estado:
             print("| " + str(i) + " |")
         print("--------------")
 
+        print("\n\nAções:")
         p = []
         for i in noAtual.acao:
             print(i, end=", ") 
-        print()
+        print("\n\n")
+
+        aux = copy.deepcopy(noAtual)
+
+        while(aux != None):
+            for i in aux.estado:
+                print(i)
+            aux = copy.deepcopy(aux.noPai)
+            print()
+        
         break
     else:
         lista = arvore.funcaoSucessora(noAtual.estado)
