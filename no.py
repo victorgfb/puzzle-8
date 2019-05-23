@@ -50,8 +50,15 @@ class No:
             novoEstado[i][j] = aux
             lista.append([novoEstado, 'd'])
 
-        
-        return lista
+        listaNos = []
+
+        for i, estado in enumerate(lista):
+            acao = self.acao[:]
+            acao.append(estado[1])
+            no = No(estado[0], self, acao, self.custoCaminho, self.profundidade)
+            listaNos.append(no)
+
+        return listaNos
 
     def manhattanDistance(self, estado):
         count = 0

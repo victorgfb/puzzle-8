@@ -4,8 +4,6 @@ import copy
 
 class arvoreBusca():
 
-    jaAberto = []
-
     def __init__(self, problema, estrategia):
         
         if(not(self.testaSolucionavel(problema))):
@@ -31,7 +29,6 @@ class arvoreBusca():
                     count += 1
         return (count % 2) == 0
 
-
     def testaObjetivo(self, estadoAtual):
         anterior = 0
         for x in estadoAtual:
@@ -41,12 +38,3 @@ class arvoreBusca():
                 if( y != 0):
                     anterior = y
         return True
-
-    def verificaJaAberto(self, no):
-        if(no.estado in self.jaAberto):
-            return True
-
-        return False
-
-    def inseriJaAberto(self, no):
-        self.jaAberto.append(no.estado)

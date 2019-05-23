@@ -5,6 +5,7 @@ from no import No
 class Borda:
 
     l = []
+    jaAberto = []
 
     def __init__(self, estrategia):
         self.estrategia = estrategia
@@ -16,10 +17,11 @@ class Borda:
             return False
     
     def inserir(self, no):
-        if(self.estrategia == "profundidade"):
-            self.l.insert(0,no)
-        else:
-            self.l.append(no)
+        if(not(self.verificaJaAberto(no))):
+            if(self.estrategia == "profundidade"):
+                self.l.insert(0,no)
+            else:
+                self.l.append(no)
 
     def verificaHeuristica(self):
         aux = sorted(self.l, key = No.getHeuristica)
@@ -39,4 +41,13 @@ class Borda:
             for k in x.estado:
                 print(k)
             print(" ")
-        
+    
+    def verificaJaAberto(self, no):
+        if(no.estado in self.jaAberto):
+            return True
+
+        self.inseriJaAberto(no)
+        return False
+
+    def inseriJaAberto(self, no):
+        self.jaAberto.append(no.estado)

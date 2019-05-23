@@ -12,6 +12,8 @@ if(modo != "largura") and (modo != "profundidade") and (modo != "gulosa"):
     print("modo invalido")
     quit()
 
+#Realiza leitura do quebra cabeça do  arquivo
+
 f = open(arquivo, 'r')
 c = f.readline()
 l = []
@@ -29,58 +31,51 @@ if(len(l) != 3):
     print("entrada invalida")
     quit()
     
-
-for i in l:
-    print(i)
-
 arvore = arvoreBusca(l, modo)
 
-while(1):    
-    if(arvore.borda.vazia()):
-        print("error")
-        break
+if(arvore.borda.vazia()):
+        print("Error: não foi possivel encontrar a solução.")
+        quit()
+noAtual = arvore.borda.removerPrimeiro()
 
-    noAtual = arvore.borda.removerPrimeiro()
+while(not(arvore.testaObjetivo(noAtual.estado))):    
     print(noAtual.profundidade)
+
     for i in noAtual.estado:
         print(i)
 
     print("\n\n")
 
-    if(arvore.testaObjetivo(noAtual.estado)):
-        print("--------------")
-        print("---SOLUÇÂO---")
-        for i in noAtual.estado:
-            print("| " + str(i) + " |")
-        print("--------------")
+    listaNos = noAtual.funcaoSucessora()
+    arvore.borda.inserirTodos(listaNos)
+    if(arvore.borda.vazia()):
+        print("Error: não foi possivel encontrar a solução.")
+        quit()
+    noAtual = arvore.borda.removerPrimeiro()
 
-        aux = copy.copy(noAtual)
+print("--------------")
+print("---SOLUÇÂO---")
+for i in noAtual.estado:
+    print("| " + str(i) + " |")
+print("--------------")
 
-        while(aux != None):
-            for i in aux.estado:
-                print(i)
-            aux = copy.copy(aux.noPai)
-            print()
+aux = copy.copy(noAtual)
+
+#imprime sequencia de passos para resolver o quebra cabeça.
+
+while(aux != None):
+    for i in aux.estado:
+        print(i)
+    aux = copy.copy(aux.noPai)
+    print()
         
-        print("\nAções:")
-        p = []
-        for i in noAtual.acao:
-            print(i, end=", ") 
-        print("\n")
+print("\nAções:")
+p = []
+for i in noAtual.acao:
+    print(i, end=", ") 
+print("\n")
 
-        print("Custo = ", noAtual.custoCaminho)
-        break
-    else:
-        lista = noAtual.funcaoSucessora()
-        listaNos = []
+print("Custo = ", noAtual.custoCaminho)
 
-        for i, estado in enumerate(lista):
-            acao = noAtual.acao[:]
-            acao.append(estado[1])
-            no = No(estado[0], noAtual, acao, noAtual.custoCaminho, noAtual.profundidade)
-            if(not(arvore.verificaJaAberto(no))):
-                listaNos.append(no)
-                arvore.inseriJaAberto(no)
-        arvore.borda.inserirTodos(listaNos)
 fim = time.time()
 print("\nTempo de execução = ", fim - ini)
