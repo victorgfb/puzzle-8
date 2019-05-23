@@ -71,7 +71,7 @@ while(1):
         print("Custo = ", noAtual.custoCaminho)
         break
     else:
-        lista = arvore.funcaoSucessora(noAtual.estado)
+        lista = noAtual.funcaoSucessora()
         listaNos = []
 
         for i, estado in enumerate(lista):
